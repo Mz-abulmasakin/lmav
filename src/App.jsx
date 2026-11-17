@@ -1,4 +1,3 @@
-
 import React, { useEffect, useRef } from "react";
 import parse from "html-react-parser";
 import AdditionalPhotoGallery from "./components/AdditionalPhotoGallery";
@@ -20,10 +19,7 @@ export default function App() {
     const handleToggle = () => {
       const isOpen = nav?.classList.toggle("open") ?? false;
       toggle?.setAttribute("aria-expanded", String(isOpen));
-      toggle?.setAttribute(
-        "aria-label",
-        isOpen ? "Close navigation" : "Open navigation"
-      );
+      toggle?.setAttribute("aria-label", isOpen ? "Close navigation" : "Open navigation");
     };
 
     const closeNav = () => {
@@ -34,50 +30,34 @@ export default function App() {
 
     const handleSubmit = (event) => {
       event.preventDefault();
-
-      if (!form?.reportValidity()) return;
-
       const values = new FormData(form);
-
       const message = [
-        "LMAV - Register Interest",
+        "LMAV – Register Interest",
         `Full name: ${values.get("fullName") || ""}`,
         `Email: ${values.get("email") || ""}`,
         `State / location: ${values.get("state") || ""}`,
         `Interest: ${values.get("interest") || ""}`,
         `Message: ${values.get("message") || "Not provided"}`,
       ].join("\n");
-
-      const whatsappUrl =
-        `https://wa.me/2348140332887?text=${encodeURIComponent(message)}`;
-
+      const whatsappUrl = `https://wa.me/2348140332887?text=${encodeURIComponent(message)}`;
       window.location.assign(whatsappUrl);
     };
 
     toggle?.addEventListener("click", handleToggle);
-    nav?.querySelectorAll("a").forEach((link) =>
-      link.addEventListener("click", closeNav)
-    );
+    nav?.querySelectorAll("a").forEach((link) => link.addEventListener("click", closeNav));
     form?.addEventListener("submit", handleSubmit);
-
     if (year) year.textContent = String(new Date().getFullYear());
 
     return () => {
       toggle?.removeEventListener("click", handleToggle);
-      nav?.querySelectorAll("a").forEach((link) =>
-        link.removeEventListener("click", closeNav)
-      );
+      nav?.querySelectorAll("a").forEach((link) => link.removeEventListener("click", closeNav));
       form?.removeEventListener("submit", handleSubmit);
     };
   }, []);
 
   const pageOptions = {
     replace(domNode) {
-      if (
-        domNode.type === "tag" &&
-        domNode.name === "div" &&
-        domNode.attribs?.id === "react-additional-photos"
-      ) {
+      if (domNode.type === "tag" && domNode.name === "div" && domNode.attribs?.id === "react-additional-photos") {
         return <AdditionalPhotoGallery key="additional-project-photos" />;
       }
       return undefined;
