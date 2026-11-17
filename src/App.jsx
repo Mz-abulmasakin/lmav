@@ -14,6 +14,10 @@ export default function App() {
     const toggle = page.querySelector("#mobileToggle");
     const nav = page.querySelector("#navlinks");
     const form = page.querySelector("#interestForm");
+<<<<<<< HEAD
+=======
+    const formMessage = page.querySelector("#formMessage");
+>>>>>>> ce9c56f97d2f60881e2f03f242e192f08cc3d4d2
     const year = page.querySelector("#year");
 
     const handleToggle = () => {
@@ -30,6 +34,7 @@ export default function App() {
 
     const handleSubmit = (event) => {
       event.preventDefault();
+<<<<<<< HEAD
       const values = new FormData(form);
       const message = [
         "LMAV – Register Interest",
@@ -41,6 +46,9 @@ export default function App() {
       ].join("\n");
       const whatsappUrl = `https://wa.me/2348140332887?text=${encodeURIComponent(message)}`;
       window.location.assign(whatsappUrl);
+=======
+      formMessage?.classList.add("show");
+>>>>>>> ce9c56f97d2f60881e2f03f242e192f08cc3d4d2
     };
 
     toggle?.addEventListener("click", handleToggle);
